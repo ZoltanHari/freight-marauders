@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://jpco6crg38cj"]
+
+[ext_resource type="Texture2D" uid="uid://eebajx846s6w" path="res://Assets/sprites/icon.svg" id="1_3ohtm"]
+[ext_resource type="Script" uid="uid://cpcxy18dehgnq" path="res://Scripts/Dingy.cs" id="1_4lcoh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t8tw1"]
+size = Vector2(51, 112)
+
+[node name="Dingy" type="CharacterBody2D" unique_id=2076951275]
+script = ExtResource("1_4lcoh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1998814777]
+position = Vector2(47.5, 4.4999924)
+scale = Vector2(0.4453125, 0.92968756)
+texture = ExtResource("1_3ohtm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=640429291]
+position = Vector2(46.5, 5)
+shape = SubResource("RectangleShape2D_t8tw1")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1334331513]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=14414189]
+position = Vector2(46.5, 5)
+shape = SubResource("RectangleShape2D_t8tw1")
+
+[node name="PassengerShape" type="Marker2D" parent="." unique_id=1773081902]
