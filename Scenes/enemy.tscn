@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://c1owaof8rg2j7"]
+
+[ext_resource type="Texture2D" uid="uid://bvasyc0b2gkdf" path="res://Assets/shitty_peed.png" id="2_1f0kj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fs7ks"]
+size = Vector2(14, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vqp0"]
+size = Vector2(18, 16)
+
+[node name="enemy" type="CharacterBody2D" unique_id=706656284]
+collision_mask = 0
+motion_mode = 1
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=620797467]
+texture = ExtResource("2_1f0kj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1250688984]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_fs7ks")
+
+[node name="AttackRange" type="Area2D" parent="." unique_id=911629747]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange" unique_id=1401322193]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_3vqp0")
