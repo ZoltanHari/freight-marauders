@@ -137,7 +137,7 @@ texture = ExtResource("1_qxrlw")
 [sub_resource type="TileSet" id="TileSet_3vqp0"]
 sources/0 = SubResource("TileSetAtlasSource_qxrlw")
 
-[node name="Game" type="Node" unique_id=1499909649]
+[node name="Game" type="Node2D" unique_id=1010277799]
 
 [node name="TileMap" type="Node" parent="." unique_id=268439752]
 
@@ -147,8 +147,8 @@ tile_set = SubResource("TileSet_3vqp0")
 [node name="Player" parent="." unique_id=117069625 instance=ExtResource("1_ebmjs")]
 position = Vector2(0, -1)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1094164231]
-zoom = Vector2(4, 4)
-
 [node name="Boat" parent="." unique_id=2100335991 instance=ExtResource("3_wrm1d")]
 position = Vector2(52, 2)
+
+[node name="PlayerCamera" type="Camera2D" parent="." unique_id=1094164231]
+zoom = Vector2(4, 4)

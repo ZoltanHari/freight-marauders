@@ -2,9 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://eebajx846s6w" path="res://Assets/sprites/icon.svg" id="1_d82p8"]
 [ext_resource type="Script" uid="uid://b6b61crwqha84" path="res://Scripts/Boat.cs" id="1_g7r5y"]
-[ext_resource type="Script" uid="uid://ciotbyabfbodp" path="res://Scripts/InteractArea.cs" id="3_badgh"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vqp0"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tcwdh"]
 size = Vector2(64, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_badgh"]
@@ -19,10 +18,11 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_d82p8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=969363231]
-shape = SubResource("RectangleShape2D_3vqp0")
+shape = SubResource("RectangleShape2D_tcwdh")
 
 [node name="InteractArea" type="Area2D" parent="." unique_id=331794825]
-script = ExtResource("3_badgh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea" unique_id=1753640916]
 shape = SubResource("RectangleShape2D_badgh")
+
+[node name="SeatMarker" type="Marker2D" parent="." unique_id=1693397008]
