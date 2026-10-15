@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfsawcviu6jdd"]
+
+[ext_resource type="Texture2D" uid="uid://eebajx846s6w" path="res://Assets/sprites/icon.svg" id="1_781ay"]
+[ext_resource type="Script" path="res://Scripts/Ladder.cs" id="2_sxjx1"]
+[ext_resource type="Texture2D" uid="uid://bvasyc0b2gkdf" path="res://Assets/shitty_peed.png" id="3_7mtel"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xaaa4"]
+size = Vector2(22, 54)
+
+[node name="CargoShip" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(8, 2)
+texture = ExtResource("1_781ay")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -0.5)
+build_mode = 1
+polygon = PackedVector2Array(-513, -126.5, 513, -127.5, 513, 129.5, -512, 128.5)
+
+[node name="Ladder" type="Area2D" parent="."]
+script = ExtResource("2_sxjx1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder"]
+position = Vector2(-184, 143)
+shape = SubResource("RectangleShape2D_xaaa4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ladder"]
+position = Vector2(-184, 142)
+scale = Vector2(0.0173037, 0.0729102)
+texture = ExtResource("3_7mtel")

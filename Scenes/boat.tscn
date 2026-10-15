@@ -1,28 +1,26 @@
-[gd_scene format=3 uid="uid://d1f02fj4dqkfi"]
+[gd_scene load_steps=4 format=3 uid="uid://d1f02fj4dqkfi"]
 
 [ext_resource type="Texture2D" uid="uid://eebajx846s6w" path="res://Assets/sprites/icon.svg" id="1_d82p8"]
-[ext_resource type="Script" uid="uid://b6b61crwqha84" path="res://Scripts/Boat.cs" id="1_g7r5y"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tcwdh"]
-size = Vector2(64, 64)
+[ext_resource type="Script" path="res://Scripts/Boat.cs" id="1_g7r5y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_badgh"]
 size = Vector2(76, 74)
 
-[node name="Boat" type="CharacterBody2D" unique_id=2100335991]
+[node name="Boat" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_g7r5y")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=235793741]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_d82p8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=969363231]
-shape = SubResource("RectangleShape2D_tcwdh")
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+build_mode = 1
+polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 
-[node name="InteractArea" type="Area2D" parent="." unique_id=331794825]
+[node name="InteractArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea" unique_id=1753640916]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
 shape = SubResource("RectangleShape2D_badgh")
 
-[node name="SeatMarker" type="Marker2D" parent="." unique_id=1693397008]
+[node name="SeatMarker" type="Marker2D" parent="."]

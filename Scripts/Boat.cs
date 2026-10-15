@@ -93,7 +93,7 @@ public partial class Boat : CharacterBody2D
 {
     PlayerInBoat = false;
 
-    Vector2 exitPosition = GlobalPosition + new Vector2(-45, 0); 
+    Vector2 exitPosition = GlobalPosition + new Vector2(0, 0); 
 
     _seatMarker.RemoveChild(player);
     GetParent().AddChild(player);

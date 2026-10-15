@@ -1,19 +1,19 @@
-[gd_scene format=3 uid="uid://bn7hj1gb7xng8"]
+[gd_scene load_steps=4 format=3 uid="uid://bn7hj1gb7xng8"]
 
-[ext_resource type="Script" uid="uid://dyv5qj1b3h7lk" path="res://Scripts/Player.cs" id="1_cvnsp"]
+[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://dnlsk3c8net0p" path="res://Assets/wilem_dafoe.png" id="2_cvnsp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wrm1d"]
 size = Vector2(12, 14.6)
 
-[node name="Player" type="CharacterBody2D" unique_id=1196412408]
+[node name="Player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_cvnsp")
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=992588612]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.01, 0.01)
 texture = ExtResource("2_cvnsp")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1234311703]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_wrm1d")

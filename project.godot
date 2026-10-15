@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="Freight_Marauders"
-run/main_scene="uid://b7cvn82lb3g3e"
-config/features=PackedStringArray("4.7", "C#", "Forward Plus")
+run/main_scene="res://Scenes/game.tscn"
+config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://Assets/sprites/icon.svg"
 
 [display]
