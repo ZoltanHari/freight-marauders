@@ -7,7 +7,7 @@
 size = Vector2(64, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_badgh"]
-size = Vector2(68, 68)
+size = Vector2(76, 74)
 
 [node name="Boat" type="CharacterBody2D" unique_id=2100335991]
 motion_mode = 1

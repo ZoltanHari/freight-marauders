@@ -80,6 +80,13 @@ move_backward={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="World"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Water"
+2d_physics/layer_4="Boat"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

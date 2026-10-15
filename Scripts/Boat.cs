@@ -7,21 +7,21 @@ public partial class Boat : CharacterBody2D
     [Export] public float RotationSpeed { get; set; } = 3.0f; 
     [Export] public float VerticalOffset { get; set; } = 35.0f;
     [Export] public float HorizontalOffset { get; set; } = -70.0f;
-	public bool Player_In_Boat = false;
+	public bool PlayerInBoat = false;
 	private bool _isPlayerNear = false;
     private bool _canToggle = true;
 
 	public Player player;
     private Marker2D _seatMarker; 
     private Area2D _area;
-    public Label boatLabel;
+    private Label boatLabel;
 
 	public override void _Ready()
 	{
 		_seatMarker = GetNode<Marker2D>("SeatMarker");
 		player = GetNode<Player>("/root/Game/Player");
         _area = GetNode<Area2D>("InteractArea");
-        boatLabel = GetNode<Label>("/root/Game/Boat/Boat Text");
+        boatLabel = GetNode<Label>("/root/Game/Boat/BoatText");
         _area.BodyEntered += OnBodyEntered;
 		_area.BodyExited += OnBodyExited;
 	}
@@ -32,7 +32,7 @@ public partial class Boat : CharacterBody2D
             ToggleVehicleState();
         }
 
-        if (Player_In_Boat)
+        if (PlayerInBoat)
         {
             float rotationDirection = Input.GetAxis("steer_left", "steer_right");
 			Rotation += rotationDirection * RotationSpeed * (float)delta;
@@ -43,13 +43,13 @@ public partial class Boat : CharacterBody2D
 			MoveAndSlide();
         }
 
-        if (!Player_In_Boat && _isPlayerNear)
+        if (!PlayerInBoat && _isPlayerNear)
         {
             StartInputCooldown();
             boatLabel.Visible = true; 
         }
 
-        else
+        else if (!_isPlayerNear)
         {
             boatLabel.Visible = false;
         }
@@ -59,12 +59,12 @@ public partial class Boat : CharacterBody2D
 
     private void ToggleVehicleState()
     {
-        if (!Player_In_Boat && _isPlayerNear)
+        if (!PlayerInBoat && _isPlayerNear)
         {
             EnterBoat();
         }
 
-        else if (Player_In_Boat)
+        else if (PlayerInBoat)
         {
             ExitBoat();
         }
@@ -74,7 +74,7 @@ public partial class Boat : CharacterBody2D
 
 	private void EnterBoat()
     {
-        Player_In_Boat = true;
+        PlayerInBoat = true;
         
         player.SetPhysicsProcess(false); 
         player.SetProcessInput(false);
@@ -91,7 +91,7 @@ public partial class Boat : CharacterBody2D
 
     private void ExitBoat()
 {
-    Player_In_Boat = false;
+    PlayerInBoat = false;
 
     Vector2 exitPosition = GlobalPosition + new Vector2(-45, 0); 
 
@@ -109,14 +109,12 @@ public partial class Boat : CharacterBody2D
     private async void StartInputCooldown()
     {
         _canToggle = false;
-        boatLabel.Visible = false;
         await ToSignal(GetTree().CreateTimer(0.2), "timeout");
         _canToggle = true;
-        boatLabel.Visible = true;
     }
 
     private void OnBodyEntered(Node body)
-	{
+    {
 		if (body is Player)
 		{
 			_isPlayerNear = true;
