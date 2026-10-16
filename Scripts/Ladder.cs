@@ -18,27 +18,26 @@ public partial class Ladder : Area2D
 	}
 
 	public override void _PhysicsProcess(double delta)
-	{
-		if  (Input.IsActionJustPressed("interact") && _isPlayerNear && !_inShip)
-		{
-			player.GetParent().RemoveChild(player);
-			_enterShip.AddChild(player);
-			player.Position = Vector2.Zero;
+{
+    if (Input.IsActionJustPressed("interact") && _isPlayerNear && !_inShip)
+    {
+        player.GetParent().RemoveChild(player);
+        _enterShip.AddChild(player);
+        player.Position = Vector2.Zero;
 
-			_isPlayerNear = false;
-			_inShip = true;
-		}
-		
-		if  (Input.IsActionJustPressed("interact") && _isPlayerNear && _inShip)
-		{
-			player.GetParent().RemoveChild(player);
-			_exitShip.AddChild(player);
-			player.Position = Vector2.Zero;
+        _isPlayerNear = false;
+        _inShip = true;
+    }
+    else if (Input.IsActionJustPressed("interact") && _isPlayerNear && _inShip)
+    {
+        player.GetParent().RemoveChild(player); 
+        GetParent().AddChild(player);
+        player.GlobalPosition = _exitShip.GlobalPosition;
 
-			_isPlayerNear = false;
-			_inShip = false;
-		}
-	}
+        _isPlayerNear = false;
+        _inShip = false;
+    }
+}
 
 	private void OnBodyEntered(Node body)
 	{
