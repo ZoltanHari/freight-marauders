@@ -4,47 +4,47 @@ using System;
 public partial class Ladder : Area2D
 {
 	public Player player;
-	private Area2D _area;
 	private bool _isPlayerNear = false;
 	private bool _inShip = false;
+	private Marker2D _enterShip; 
+	private Marker2D _exitShip;
 	
 	public override void _Ready()
 	{
 		BodyEntered += OnBodyEntered;
 		player = GetNode<Player>("/root/Game/Player");
-		_area = GetNode<Area2D>("/root/CargoShip/InShip");
-		_area.BodyEntered += OnBodyEntered;
+		_enterShip = GetNode<Marker2D>("../EnterShip");
+		_exitShip = GetNode<Marker2D>("../ExitShip");
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		if  (Input.IsActionJustPressed("interact") && _isPlayerNear && !_inShip)
 		{
-			Vector2 exitPosition = GlobalPosition + new Vector2(0, 5); 
-    		player.GlobalPosition = exitPosition;
+			player.GetParent().RemoveChild(player);
+			_enterShip.AddChild(player);
+			player.Position = Vector2.Zero;
+
 			_isPlayerNear = false;
+			_inShip = true;
 		}
 		
 		if  (Input.IsActionJustPressed("interact") && _isPlayerNear && _inShip)
 		{
-			Vector2 exitPosition = GlobalPosition + new Vector2(0, -5); 
-			player.GlobalPosition = exitPosition;
+			player.GetParent().RemoveChild(player);
+			_exitShip.AddChild(player);
+			player.Position = Vector2.Zero;
+
 			_isPlayerNear = false;
+			_inShip = false;
 		}
 	}
 
 	private void OnBodyEntered(Node body)
-    {
-		if (body is Player && !_inShip)
+	{
+		if (body is Player)
 		{
 			_isPlayerNear = true;
-			_inShip = true;
-		}
-
-		if (body is Player && _inShip)
-		{
-			_inShip = false;
-			_isPlayerNear = false;
 		}
 	}
 }
