@@ -1,31 +1,40 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfsawcviu6jdd"]
+[gd_scene format=3 uid="uid://bfsawcviu6jdd"]
 
 [ext_resource type="Texture2D" uid="uid://eebajx846s6w" path="res://Assets/sprites/icon.svg" id="1_781ay"]
-[ext_resource type="Script" path="res://Scripts/Ladder.cs" id="2_sxjx1"]
+[ext_resource type="Script" uid="uid://c3ncngwoy0jwj" path="res://Scripts/Ladder.cs" id="2_sxjx1"]
 [ext_resource type="Texture2D" uid="uid://bvasyc0b2gkdf" path="res://Assets/shitty_peed.png" id="3_7mtel"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xaaa4"]
 size = Vector2(22, 54)
 
-[node name="CargoShip" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vqp0"]
+size = Vector2(1019, 248)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="CargoShip" type="CharacterBody2D" unique_id=521902278]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=30365499]
 scale = Vector2(8, 2)
 texture = ExtResource("1_781ay")
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="." unique_id=113722217]
 position = Vector2(0, -0.5)
 build_mode = 1
 polygon = PackedVector2Array(-513, -126.5, 513, -127.5, 513, 129.5, -512, 128.5)
 
-[node name="Ladder" type="Area2D" parent="."]
+[node name="Ladder" type="Area2D" parent="." unique_id=989707626]
 script = ExtResource("2_sxjx1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder" unique_id=531287654]
 position = Vector2(-184, 143)
 shape = SubResource("RectangleShape2D_xaaa4")
 
-[node name="Sprite2D" type="Sprite2D" parent="Ladder"]
+[node name="Sprite2D" type="Sprite2D" parent="Ladder" unique_id=1446961841]
 position = Vector2(-184, 142)
 scale = Vector2(0.0173037, 0.0729102)
 texture = ExtResource("3_7mtel")
+
+[node name="InShip" type="Area2D" parent="." unique_id=1599764156]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InShip" unique_id=2132349864]
+position = Vector2(-0.5, -1)
+shape = SubResource("RectangleShape2D_3vqp0")
