@@ -1,40 +1,43 @@
 using Godot;
-using System;
 
 public partial class Ladder : Area2D
-{
-	public Player player;
-	private bool _isPlayerNear = false;
-	private bool _inShip = false;
-	private Marker2D _enterShip; 
-	private Marker2D _exitShip;
+{ 
+	public bool IsPlayerNear; 
+	private bool _inShip;
+	
+	Player _player;
+	Marker2D _enterShip; 
+	Marker2D _exitShip;
+	Node _ogParent;
+	StaticBody2D _cargoShip;
 	
 	public override void _Ready()
 	{
-		BodyEntered += OnBodyEntered;
-		player = GetNode<Player>("/root/Game/Player");
+		_player = GetNode<Player>("/root/Game/Player");
 		_enterShip = GetNode<Marker2D>("../EnterShip");
 		_exitShip = GetNode<Marker2D>("../ExitShip");
+		_cargoShip = GetNode<StaticBody2D>("/root/Game/CargoShip");
+		_ogParent = _player.GetParent();
+		BodyEntered += OnBodyEntered;
 	}
 
 	public override void _PhysicsProcess(double delta)
 {
-    if (Input.IsActionJustPressed("interact") && _isPlayerNear && !_inShip)
+    if (Input.IsActionJustPressed("interact") && IsPlayerNear && !_inShip)
     {
-        player.GetParent().RemoveChild(player);
-        _enterShip.AddChild(player);
-        player.Position = Vector2.Zero;
+        _player.Reparent(_cargoShip);
+        _player.GlobalPosition = _enterShip.GlobalPosition;
 
-        _isPlayerNear = false;
+        IsPlayerNear = false;
         _inShip = true;
     }
-    else if (Input.IsActionJustPressed("interact") && _isPlayerNear && _inShip)
+    
+    else if (Input.IsActionJustPressed("interact") && IsPlayerNear && _inShip)
     {
-        player.GetParent().RemoveChild(player); 
-        GetParent().AddChild(player);
-        player.GlobalPosition = _exitShip.GlobalPosition;
+        _player.Reparent(_ogParent);
+        _player.GlobalPosition = _exitShip.GlobalPosition;
 
-        _isPlayerNear = false;
+        IsPlayerNear = false;
         _inShip = false;
     }
 }
@@ -43,7 +46,7 @@ public partial class Ladder : Area2D
 	{
 		if (body is Player)
 		{
-			_isPlayerNear = true;
+			IsPlayerNear = true;
 		}
 	}
 }

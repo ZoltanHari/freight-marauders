@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class Boat : CharacterBody2D
 {
@@ -7,23 +6,28 @@ public partial class Boat : CharacterBody2D
     [Export] public float RotationSpeed { get; set; } = 3.0f; 
     [Export] public float VerticalOffset { get; set; } = 35.0f;
     [Export] public float HorizontalOffset { get; set; } = -70.0f;
-	public bool PlayerInBoat = false;
-	private bool _isPlayerNear = false;
+	private bool _playerInBoat;
+	private bool _isPlayerNearBoat;
     private bool _canToggle = true;
-
-	public Player player;
-    private Marker2D _seatMarker; 
-    private Area2D _area;
-    private Label boatLabel;
+	
+	Player _player;
+    Marker2D _seatMarker; 
+    Area2D _area;
+	Label _boatLabel;
+	Ladder _ladder;
+	Node _ogParent;
+    
 
 	public override void _Ready()
 	{
 		_seatMarker = GetNode<Marker2D>("SeatMarker");
-		player = GetNode<Player>("/root/Game/Player");
+		_player = GetNode<Player>("/root/Game/Player");
         _area = GetNode<Area2D>("InteractArea");
-        boatLabel = GetNode<Label>("/root/Game/Boat/BoatText");
+        _boatLabel = GetNode<Label>("/root/Game/Boat/BoatText");
+        _ladder = GetNode<Ladder>("/root/Game/CargoShip/Ladder");
         _area.BodyEntered += OnBodyEntered;
 		_area.BodyExited += OnBodyExited;
+		_ogParent = _player.GetParent();
 	}
 	public override void _PhysicsProcess(double delta)
 	{
@@ -32,7 +36,7 @@ public partial class Boat : CharacterBody2D
             ToggleVehicleState();
         }
 
-        if (PlayerInBoat)
+        if (_playerInBoat)
         {
             float rotationDirection = Input.GetAxis("steer_left", "steer_right");
 			Rotation += rotationDirection * RotationSpeed * (float)delta;
@@ -43,28 +47,28 @@ public partial class Boat : CharacterBody2D
 			MoveAndSlide();
         }
 
-        if (!PlayerInBoat && _isPlayerNear)
+        if (!_playerInBoat && _isPlayerNearBoat)
         {
             StartInputCooldown();
-            boatLabel.Visible = true; 
+            _boatLabel.Visible = true; 
         }
 
-        else if (!_isPlayerNear)
+        else if (!_isPlayerNearBoat)
         {
-            boatLabel.Visible = false;
+            _boatLabel.Visible = false;
         }
 
-        boatLabel.GlobalPosition = GlobalPosition + new Vector2(HorizontalOffset, VerticalOffset);
+        _boatLabel.GlobalPosition = GlobalPosition + new Vector2(HorizontalOffset, VerticalOffset);
 	}
 
     private void ToggleVehicleState()
     {
-        if (!PlayerInBoat && _isPlayerNear)
+        if (!_playerInBoat && _isPlayerNearBoat && !_ladder.IsPlayerNear)
         {
             EnterBoat();
         }
 
-        else if (PlayerInBoat)
+        else if (_playerInBoat)
         {
             ExitBoat();
         }
@@ -74,35 +78,33 @@ public partial class Boat : CharacterBody2D
 
 	private void EnterBoat()
     {
-        PlayerInBoat = true;
+        _playerInBoat = true;
         
-        player.SetPhysicsProcess(false); 
-        player.SetProcessInput(false);
+        _player.SetPhysicsProcess(false); 
+        _player.SetProcessInput(false);
 
-        player.GetNode<CollisionShape2D>("CollisionShape2D").Disabled = true; 
+        _player.GetNode<CollisionShape2D>("CollisionShape2D").Disabled = true; 
 
-        player.GetParent().RemoveChild(player);
-        _seatMarker.AddChild(player);
+        _player.Reparent(this);
 
-        player.Position = Vector2.Zero;
+        _player.GlobalPosition = _seatMarker.GlobalPosition;
 
-        boatLabel.Visible = false;
+        _boatLabel.Visible = false;
     }
 
     private void ExitBoat()
 {
-    PlayerInBoat = false;
+    _playerInBoat = false;
 
     Vector2 exitPosition = GlobalPosition + new Vector2(0, 0); 
 
-    _seatMarker.RemoveChild(player);
-    GetParent().AddChild(player);
+    _player.Reparent(_ogParent);
 
-    player.GlobalPosition = exitPosition;
+    _player.GlobalPosition = exitPosition;
 
-    player.SetPhysicsProcess(true);
-    player.SetProcessInput(true);
-    player.GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false; 
+    _player.SetPhysicsProcess(true);
+    _player.SetProcessInput(true);
+    _player.GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false; 
 }
 
 
@@ -117,8 +119,8 @@ public partial class Boat : CharacterBody2D
     {
 		if (body is Player)
 		{
-			_isPlayerNear = true;
-            boatLabel.Visible = true; 
+			_isPlayerNearBoat = true;
+            _boatLabel.Visible = true; 
 		}
 	}
 
@@ -126,7 +128,7 @@ public partial class Boat : CharacterBody2D
     {
         if (body is Player)
         {
-            _isPlayerNear = false;
+            _isPlayerNearBoat = false;
 		}
 	}
 }
