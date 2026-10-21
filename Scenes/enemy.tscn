@@ -1,27 +1,31 @@
-[gd_scene format=3 uid="uid://c1owaof8rg2j7"]
+[gd_scene load_steps=5 format=3 uid="uid://c1owaof8rg2j7"]
 
+[ext_resource type="Script" path="res://Scripts/Enemy.cs" id="1_6btuy"]
 [ext_resource type="Texture2D" uid="uid://bvasyc0b2gkdf" path="res://Assets/shitty_peed.png" id="2_1f0kj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fs7ks"]
-size = Vector2(14, 12)
+size = Vector2(920, 680)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vqp0"]
-size = Vector2(18, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_nfae8"]
+radius = 5000.44
 
-[node name="enemy" type="CharacterBody2D" unique_id=706656284]
+[node name="Enemy" type="CharacterBody2D"]
+scale = Vector2(0.015, 0.015)
 collision_mask = 0
 motion_mode = 1
+script = ExtResource("1_6btuy")
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=620797467]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_1f0kj")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1250688984]
-position = Vector2(0, 6)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_fs7ks")
 
-[node name="AttackRange" type="Area2D" parent="." unique_id=911629747]
+[node name="Sight" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange" unique_id=1401322193]
-position = Vector2(0, 6)
-shape = SubResource("RectangleShape2D_3vqp0")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight"]
+shape = SubResource("CircleShape2D_nfae8")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Sight"]
+shape = SubResource("CircleShape2D_nfae8")

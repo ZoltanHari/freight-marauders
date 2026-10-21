@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=4 uid="uid://b7cvn82lb3g3e"]
+[gd_scene load_steps=12 format=4 uid="uid://b7cvn82lb3g3e"]
 
 [ext_resource type="PackedScene" uid="uid://bn7hj1gb7xng8" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="Texture2D" uid="uid://s7utgd256rdi" path="res://Assets/sprites/world_tileset.png" id="1_qxrlw"]
 [ext_resource type="FontFile" uid="uid://dchywxek7qfsi" path="res://Assets/fonts/PixelOperator8.ttf" id="3_3dryh"]
 [ext_resource type="PackedScene" uid="uid://d1f02fj4dqkfi" path="res://Scenes/boat.tscn" id="3_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://bfsawcviu6jdd" path="res://Scenes/cargo_ship.tscn" id="5_rldm4"]
+[ext_resource type="PackedScene" uid="uid://c1owaof8rg2j7" path="res://Scenes/enemy.tscn" id="6_u0ejh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3dryh"]
 texture = ExtResource("1_qxrlw")
@@ -574,3 +575,6 @@ z_index = -1
 position = Vector2(7, -249)
 collision_layer = 9
 collision_mask = 11
+
+[node name="enemy" parent="." instance=ExtResource("6_u0ejh")]
+position = Vector2(-82, -31)
