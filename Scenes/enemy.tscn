@@ -1,31 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1owaof8rg2j7"]
+[gd_scene format=3 uid="uid://c1owaof8rg2j7"]
 
-[ext_resource type="Script" path="res://Scripts/Enemy.cs" id="1_6btuy"]
+[ext_resource type="Script" uid="uid://bsgpk2h3bnwcd" path="res://Scripts/Enemy.cs" id="1_6btuy"]
 [ext_resource type="Texture2D" uid="uid://bvasyc0b2gkdf" path="res://Assets/shitty_peed.png" id="2_1f0kj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fs7ks"]
 size = Vector2(920, 680)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nfae8"]
-radius = 5000.44
+radius = 5070.6123
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" unique_id=396178564]
 scale = Vector2(0.015, 0.015)
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_6btuy")
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1282292513]
 texture = ExtResource("2_1f0kj")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1884629532]
 shape = SubResource("RectangleShape2D_fs7ks")
 
-[node name="Sight" type="Area2D" parent="."]
+[node name="Sight" type="Area2D" parent="." unique_id=1320040626]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=1358716309]
 shape = SubResource("CircleShape2D_nfae8")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Sight"]
-shape = SubResource("CircleShape2D_nfae8")
+[node name="RayCast2D" type="RayCast2D" parent="Sight" unique_id=1330080171]
+scale = Vector2(0.9999999, 0.9999999)
+collision_mask = 9

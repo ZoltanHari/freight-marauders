@@ -1,10 +1,8 @@
 using Godot;
-using System;
 
 public partial class Player : CharacterBody2D
 {
     [Export] public float Speed { get; set; } = 150f;
-    public bool Player_Can_Move = true;
 
     public override void _Ready()
     {
