@@ -3,40 +3,32 @@ using Godot;
 public partial class Enemy : CharacterBody2D
 {
 	[Export] public float Speed { get; set; } = 60f;
-	private bool _playerInZone;
 	Player _target;
 	Player _player;
-	RayCast2D _raycast;
-	
+	NavigationAgent2D _pathfinding;
+	Timer _timer;
 	
 	public override void _Ready()
 	{
 		Area2D area = GetNode<Area2D>("Sight");
-		_raycast = GetNode<RayCast2D>("Sight/RayCast2D");
 		_player = GetNode<Player>("/root/Game/Player");
+		_pathfinding = GetNode<NavigationAgent2D>("PathFinding");
+		_timer = GetNode<Timer>("Timer");
+		_timer.Timeout += OnTimerTimeout;
 		area.BodyEntered += OnBodyEntered;
 		area.BodyExited += OnBodyExited;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (_playerInZone)
-		{
-			_raycast.TargetPosition = _raycast.ToLocal(_player.GlobalPosition);
-			_raycast.ForceRaycastUpdate();
-		}
+		Vector2 direction = (_pathfinding.GetNextPathPosition() - GlobalPosition).Normalized();
+		Velocity = Speed * direction;
+		MoveAndSlide();
+	}
 
-		if (_raycast.IsColliding())
-		{
-			var collider = _raycast.GetCollider();
-			if (collider == _player)
-			{
-				Vector2 direction = (_player.GlobalPosition - GlobalPosition).Normalized();
-				Velocity = direction * Speed;
-				MoveAndSlide();
-				
-			}
-		}
+	private void MakePath()
+	{
+		_pathfinding.TargetPosition = _player.GlobalPosition;
 	}
 
 	private void OnBodyEntered(Node body)
@@ -44,7 +36,6 @@ public partial class Enemy : CharacterBody2D
 		if (body is Player)
 		{
 			_target = _player;
-			_playerInZone = true;
 		}
 	}
 	
@@ -53,7 +44,11 @@ public partial class Enemy : CharacterBody2D
 		if (body is Player)
 		{
 			_target = null;
-			_playerInZone = false;
 		}
-	} 
+	}
+
+	private void OnTimerTimeout()
+	{
+		MakePath();
+	}
 }

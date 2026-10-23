@@ -30,3 +30,10 @@ shape = SubResource("CircleShape2D_nfae8")
 [node name="RayCast2D" type="RayCast2D" parent="Sight" unique_id=1330080171]
 scale = Vector2(0.9999999, 0.9999999)
 collision_mask = 9
+
+[node name="PathFinding" type="NavigationAgent2D" parent="." unique_id=1972040923]
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="." unique_id=1946011031]
+wait_time = 0.5
+autostart = true

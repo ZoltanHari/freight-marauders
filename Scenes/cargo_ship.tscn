@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bfsawcviu6jdd"]
+[gd_scene format=3 uid="uid://bfsawcviu6jdd"]
 
 [ext_resource type="Texture2D" uid="uid://eebajx846s6w" path="res://Assets/sprites/icon.svg" id="1_781ay"]
-[ext_resource type="Script" path="res://Scripts/Ladder.cs" id="2_sxjx1"]
+[ext_resource type="Script" uid="uid://c3ncngwoy0jwj" path="res://Scripts/Ladder.cs" id="2_sxjx1"]
 [ext_resource type="Texture2D" uid="uid://bvasyc0b2gkdf" path="res://Assets/shitty_peed.png" id="3_7mtel"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xaaa4"]
@@ -19,42 +19,44 @@ size = Vector2(1022, 2)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nbnhb"]
 size = Vector2(1, 258)
 
-[node name="CargoShip" type="StaticBody2D"]
+[node name="CargoShip" type="StaticBody2D" unique_id=1567674194]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=381975419]
 scale = Vector2(8, 2)
 texture = ExtResource("1_781ay")
 
-[node name="Ladder" type="Area2D" parent="."]
+[node name="Ladder" type="Area2D" parent="." unique_id=1045777770]
 script = ExtResource("2_sxjx1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder" unique_id=1859787528]
 position = Vector2(-184, 143)
 shape = SubResource("RectangleShape2D_xaaa4")
 
-[node name="Sprite2D" type="Sprite2D" parent="Ladder"]
+[node name="Sprite2D" type="Sprite2D" parent="Ladder" unique_id=1213005139]
 position = Vector2(-184, 142)
 scale = Vector2(0.0173037, 0.0729102)
 texture = ExtResource("3_7mtel")
 
-[node name="LeftWall" type="CollisionShape2D" parent="."]
+[node name="LeftWall" type="CollisionShape2D" parent="." unique_id=291664632]
 position = Vector2(-511.5, 0)
 shape = SubResource("RectangleShape2D_mcq2e")
 
-[node name="UpWall" type="CollisionShape2D" parent="."]
+[node name="UpWall" type="CollisionShape2D" parent="." unique_id=1209084757]
 position = Vector2(1, -128.5)
 shape = SubResource("RectangleShape2D_viudp")
 
-[node name="DownWall" type="CollisionShape2D" parent="."]
+[node name="DownWall" type="CollisionShape2D" parent="." unique_id=482687972]
 position = Vector2(0, 128)
 shape = SubResource("RectangleShape2D_tx44f")
 
-[node name="RightWall" type="CollisionShape2D" parent="."]
+[node name="RightWall" type="CollisionShape2D" parent="." unique_id=491755398]
 position = Vector2(512.5, 1)
 shape = SubResource("RectangleShape2D_nbnhb")
 
-[node name="EnterShip" type="Marker2D" parent="."]
+[node name="EnterShip" type="Marker2D" parent="." unique_id=2071917980]
 position = Vector2(-185, 115)
 
-[node name="ExitShip" type="Marker2D" parent="."]
+[node name="ExitShip" type="Marker2D" parent="." unique_id=261554358]
 position = Vector2(-185, 170)
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=1684165319]

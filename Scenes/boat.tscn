@@ -1,32 +1,35 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1f02fj4dqkfi"]
+[gd_scene format=3 uid="uid://d1f02fj4dqkfi"]
 
 [ext_resource type="Texture2D" uid="uid://eebajx846s6w" path="res://Assets/sprites/icon.svg" id="1_d82p8"]
-[ext_resource type="Script" path="res://Scripts/Boat.cs" id="1_g7r5y"]
+[ext_resource type="Script" uid="uid://b6b61crwqha84" path="res://Scripts/Boat.cs" id="1_g7r5y"]
 [ext_resource type="Texture2D" uid="uid://bvasyc0b2gkdf" path="res://Assets/shitty_peed.png" id="3_ncpo1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_badgh"]
 size = Vector2(60, 60)
 
-[node name="Boat" type="CharacterBody2D"]
+[node name="Boat" type="CharacterBody2D" unique_id=1644085614]
 motion_mode = 1
 script = ExtResource("1_g7r5y")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1667734205]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_d82p8")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=149938586]
 build_mode = 1
 polygon = PackedVector2Array(-32, -32, -32, -12, -32, -32, 32, -32, 32, 32, -32, 31, -32, 15, -32, 31, 32, 32, 32, -32)
 
-[node name="InteractArea" type="Area2D" parent="."]
+[node name="InteractArea" type="Area2D" parent="." unique_id=2037482806]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea" unique_id=686893028]
 shape = SubResource("RectangleShape2D_badgh")
 
-[node name="SeatMarker" type="Marker2D" parent="."]
+[node name="SeatMarker" type="Marker2D" parent="." unique_id=681683017]
 
-[node name="Door" type="Sprite2D" parent="."]
+[node name="Door" type="Sprite2D" parent="." unique_id=1693988557]
 position = Vector2(-31, 1)
 scale = Vector2(0.00222222, 0.0393939)
 texture = ExtResource("3_ncpo1")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=1885526105]
+radius = 50.0
